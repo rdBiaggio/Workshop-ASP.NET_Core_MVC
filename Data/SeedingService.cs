@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using SalesWebMVC.Models;
+using SalesWebMVC.Models.Entities;
 
 namespace SalesWebMVC.Data
 {
