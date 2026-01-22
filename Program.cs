@@ -12,6 +12,13 @@ builder.Services.AddScoped<SeedingService>();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var seedingService = services.GetRequiredService<SeedingService>();
+    seedingService.Seed();
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -31,12 +38,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// Bloco para popular o banco de dados (Seeding Service)
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var seedingService = services.GetRequiredService<SeedingService>();
-    seedingService.Seed();
-}
 
 app.Run();
