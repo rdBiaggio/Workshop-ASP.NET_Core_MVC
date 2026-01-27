@@ -1,11 +1,10 @@
-﻿@using SalesWebMVC.Models.Entities
-@model Department
+﻿@model SalesWebMVC.Models.Entities.Department
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h2>@ViewData["Title"]</h2>
 
 <h4>Department</h4>
 <hr />
@@ -19,7 +18,7 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -27,7 +26,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-primary mt-2">Back to List</a>
 </div>
 
 @section Scripts {
