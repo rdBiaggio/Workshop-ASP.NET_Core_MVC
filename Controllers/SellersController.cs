@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SalesWebMVC.Models.Entities;
 using SalesWebMVC.Models.Services;
+using SalesWebMVC.Models.Services.Exceptions;
 using SalesWebMVC.Models.ViewModels;
 using System.Diagnostics;
 
@@ -62,8 +63,15 @@ namespace SalesWebMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _sellerService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _sellerService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch(IntegrityException ex)
+            {
+                return RedirectToAction(nameof(Error), new { message = ex.Message });
+            }
         }
 
         public async Task<IActionResult> Details(int? id)
